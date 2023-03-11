@@ -3,5 +3,5 @@
     "domains": ["misskey.io", "misskey.art"],
     "thumbnail": ".files a",
     "text": ".text span",
-    "timeout": 10000,
+    "timeout": 10000
 }
