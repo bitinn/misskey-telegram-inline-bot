@@ -1,0 +1,15 @@
+{
+  "name": "misskey-telegram-inline-bot",
+  "version": "1.0.0",
+  "description": "A bot that can take a misskey instance link and return a full message with image preview because I too damn tired",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^19.7.4",
+    "telegraf": "^4.12.2"
+  }
+}
