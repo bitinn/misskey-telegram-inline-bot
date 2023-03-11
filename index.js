@@ -13,6 +13,11 @@ const bot = new Telegraf(settings.token);
 
 bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
     const link = inlineQuery.query;
+
+    if (!link) {
+        return answerInlineQuery([]);
+    }
+
     const url = new URL(link);
 
     if (!settings.domains.includes(url.hostname)) {
