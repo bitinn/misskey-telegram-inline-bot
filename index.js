@@ -1,14 +1,15 @@
 
-import { Telegraf as tg } from "telegraf";
-import puppeteer from "puppeteer";
-import crypto from "crypto";
-import defaults from "./settings-default.json" assert { type: "json" };
-import configs from "./settings.json" assert { type: "json" };
+const { Telegraf } = require("telegraf");
+const { puppeteer } = require("puppeteer");
+const crypto = require("crypto");
+
+const defaults = require(__dirname + "/settings-default.json");
+const configs = require(__dirname + "/settings.json");
 
 const settings = Object.assign({}, defaults, configs);
 const sha256 = x => crypto.createHash('sha256').update(x, 'utf8').digest('hex');
 
-const bot = new tg(settings.token);
+const bot = new Telegraf(settings.token);
 
 bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
     const link = inlineQuery.query;
