@@ -30,7 +30,7 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
     // optimize this?
     try {
         const page = await browser.newPage();
-        await page.goto(url);
+        await page.goto(link);
 
         const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
         await files.click();
@@ -50,11 +50,13 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
         }];
 
         console.log(results);
+        browser.close();
 
         return answerInlineQuery(results, {});
     } catch (err) {
-        browser.close();
         console.error(err);
+        browser.close();
+
         return answerInlineQuery([], {});
     }
 });
