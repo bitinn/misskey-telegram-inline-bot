@@ -32,6 +32,9 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
         const page = await browser.newPage();
         await page.goto(url);
 
+        const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
+        await files.click();
+
         const images = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
         const texts = await page.waitForSelector(settings.text, { timeout: settings.timeout });
 
@@ -41,7 +44,7 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
         const results = [{
             type: 'photo',
             id: sha256(link),
-            caption: text,
+            caption: text + " via " + link,
             photo_url: image,
             thumb_url: image,
         }];
