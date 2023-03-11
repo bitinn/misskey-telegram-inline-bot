@@ -11,17 +11,17 @@ const sha256 = x => crypto.createHash('sha256').update(x, 'utf8').digest('hex');
 
 const bot = new Telegraf(settings.token);
 
-bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
-    const link = inlineQuery.query;
+bot.on("inline_query", async(ctx) => {
+    const link = ctx.inlineQuery.query;
 
     if (!link) {
-        return answerInlineQuery([], {});
+        return ctx.answerInlineQuery([], {});
     }
 
     const url = new URL(link);
 
     if (!settings.domains.includes(url.hostname)) {
-        return answerInlineQuery([], {});
+        return ctx.nswerInlineQuery([], {});
     }
 
     const browser = await puppeteer.launch();
@@ -61,12 +61,12 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
         console.log(results);
         browser.close();
 
-        return answerInlineQuery(results, {});
+        return ctx.answerInlineQuery(results, {});
     } catch (err) {
         console.error(err);
         browser.close();
 
-        return answerInlineQuery([], {});
+        return ctx.answerInlineQuery([], {});
     }
 });
 
