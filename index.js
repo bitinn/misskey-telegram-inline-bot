@@ -59,11 +59,12 @@ bot.on("inline_query", async(ctx) => {
         console.log(text);
 
         const results = [{
-            type: 'photo',
+            type: 'article',
             id: sha256(link),
-            caption: text + " via " + link,
-            photo_url: image,
-            thumb_url: image,
+            title: name,
+            description: text,
+            url: link,
+            thumbnail_url: image,
         }];
 
         console.log(results);
