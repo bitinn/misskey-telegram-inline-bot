@@ -2,5 +2,6 @@
     "token": "... talk to @BotFather ...",
     "domains": ["misskey.io", "misskey.art"],
     "thumbnail": ".files a",
-    "text": ".text span"
+    "text": ".text span",
+    "timeout": 10000,
 }
