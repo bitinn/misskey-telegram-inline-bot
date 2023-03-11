@@ -40,6 +40,8 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
             thumb_url: image,
         }];
 
+        console.log(results);
+
         return answerInlineQuery(results);
     } catch (err) {
         browser.close();
