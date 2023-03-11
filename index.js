@@ -66,7 +66,7 @@ bot.on("inline_query", async(ctx) => {
             url: link,
             thumbnail_url: image,
             input_message_content: {
-                message_text: name + " / " + image
+                message_text: name + " / " + text + " / " + image + " / " + link
             }
         }];
 
