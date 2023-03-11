@@ -15,13 +15,13 @@ bot.on("inline_query", async(ctx) => {
     const link = ctx.inlineQuery.query;
 
     if (!link) {
-        return ctx.answerInlineQuery([], {});
+        return ctx.answerInlineQuery([], { cache_time: settings.cache_time });
     }
 
     const url = new URL(link);
 
     if (!settings.domains.includes(url.hostname)) {
-        return ctx.nswerInlineQuery([], {});
+        return ctx.nswerInlineQuery([], { cache_time: settings.cache_time });
     }
 
     const browser = await puppeteer.launch();
@@ -61,12 +61,12 @@ bot.on("inline_query", async(ctx) => {
         console.log(results);
         browser.close();
 
-        return ctx.answerInlineQuery(results, {});
+        return ctx.answerInlineQuery(results, { cache_time: settings.cache_time });
     } catch (err) {
         console.error(err);
         browser.close();
 
-        return ctx.answerInlineQuery([], {});
+        return ctx.answerInlineQuery([], { cache_time: settings.cache_time });
     }
 });
 
