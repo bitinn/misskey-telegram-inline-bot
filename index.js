@@ -1,6 +1,6 @@
 
 const { Telegraf } = require("telegraf");
-const { puppeteer } = require("puppeteer");
+const puppeteer = require("puppeteer");
 const crypto = require("crypto");
 
 const defaults = require(__dirname + "/settings-default.json");
