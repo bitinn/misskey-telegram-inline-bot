@@ -32,14 +32,23 @@ bot.on("inline_query", async({ inlineQuery, answerInlineQuery }) => {
         const page = await browser.newPage();
         await page.goto(link);
 
+        const title = await page.waitForSelector("title", { timeout: settings.timeout });
+        const name = await title.evaluate(el => el.textContent);
+        console.log(name);
+
         const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
+        console.log("found " + settings.click);
         await files.click();
 
         const images = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
         const texts = await page.waitForSelector(settings.text, { timeout: settings.timeout });
+        console.log("found " + settings.thumbnail);
 
         const image = await images.evaluate(el => el.href);
         const text = await texts.evaluate(el => el.textContent);
+
+        console.log(image);
+        console.log(text);
 
         const results = [{
             type: 'photo',
