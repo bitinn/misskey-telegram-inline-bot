@@ -34,8 +34,11 @@ bot.on("inline_query", async(ctx) => {
 
     // optimize this?
     try {
+        const start = Date.now();
+        console.log(start);
+
         const page = await browser.newPage();
-        await page.goto(link);
+        await page.goto(link, { waitUntil: 'domcontentloaded' });
 
         const title = await page.waitForSelector("title", { timeout: settings.timeout });
         const name = await title.evaluate(el => el.textContent);
@@ -65,6 +68,9 @@ bot.on("inline_query", async(ctx) => {
 
         console.log(results);
         browser.close();
+
+        const end = Date.now();
+        console.log(end - start);
 
         return ctx.answerInlineQuery(results, { cache_time: settings.cache_time });
     } catch (err) {

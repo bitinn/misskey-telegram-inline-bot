@@ -4,6 +4,6 @@
     "click": ".files",
     "thumbnail": ".files a",
     "text": ".text span",
-    "timeout": 5000,
+    "timeout": 20000,
     "cache_time": 0
 }

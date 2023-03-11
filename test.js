@@ -13,6 +13,9 @@ const settings = Object.assign({}, defaults, configs);
 
     // optimize this?
     try {
+        const start = Date.now();
+        console.log(start);
+
         const page = await browser.newPage();
         await page.goto(link);
 
@@ -33,6 +36,9 @@ const settings = Object.assign({}, defaults, configs);
 
         console.log(image);
         console.log(text);
+
+        const end = Date.now();
+        console.log(end - start);
     } catch (err) {
         console.error(err);
     }
