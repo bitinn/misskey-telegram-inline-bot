@@ -18,10 +18,15 @@ bot.on("inline_query", async(ctx) => {
         return ctx.answerInlineQuery([], { cache_time: settings.cache_time });
     }
 
-    const url = new URL(link);
+    let url;
+    try {
+        url = new URL(link);
+    } catch (err) {
+        return ctx.answerInlineQuery([], { cache_time: settings.cache_time });
+    }
 
     if (!settings.domains.includes(url.hostname)) {
-        return ctx.nswerInlineQuery([], { cache_time: settings.cache_time });
+        return ctx.answerInlineQuery([], { cache_time: settings.cache_time });
     }
 
     const browser = await puppeteer.launch();
