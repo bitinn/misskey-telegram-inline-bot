@@ -1,7 +1,7 @@
 
 const { Telegraf } = require("telegraf");
 const puppeteer = require("puppeteer");
-const { md } = require("telegram-escape");
+const { escapeMarkdown } = require("telegram-escape");
 const crypto = require("crypto");
 
 const defaults = require(__dirname + "/settings-default.json");
