@@ -63,7 +63,7 @@ async function getData(browser, link, start) {
         url: link,
         thumbnail_url: thumb,
         input_message_content: {
-            message_text: md(name + " / " + text + " / [image](" + image + ") / [post](" + link + ")"),
+            message_text: escapeMarkdown(name + " / " + text + " / [image](" + image + ") / [post](" + link + ")"),
             parse_mode: "MarkdownV2",
         },
     };
