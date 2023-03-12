@@ -1,5 +1,6 @@
 
 const puppeteer = require("puppeteer");
+const { escapeMarkdown } = require("telegram-escape");
 const crypto = require("crypto");
 
 const defaults = require(__dirname + "/settings-default.json");
@@ -65,7 +66,8 @@ async function getData(browser, link, start) {
         url: link,
         thumbnail_url: thumb,
         input_message_content: {
-            message_text: name + " / " + text + " / [image](" + image + ") / [post](" + link + ")",
+            message_text: escapeMarkdown(name + " / " + text + " / [image](" + image + ") / [post](" + link + ")"),
+            parse_mode: "MarkdownV2",
         },
     };
 }

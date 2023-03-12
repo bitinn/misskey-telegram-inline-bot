@@ -1,6 +1,7 @@
 
 const { Telegraf } = require("telegraf");
 const puppeteer = require("puppeteer");
+const { md } = require("telegram-escape");
 const crypto = require("crypto");
 
 const defaults = require(__dirname + "/settings-default.json");
@@ -62,8 +63,8 @@ async function getData(browser, link, start) {
         url: link,
         thumbnail_url: thumb,
         input_message_content: {
-            message_text: name + " / " + text + " / [image](" + image + ") / [post](" + link + ")",
-            parse_mode: "HTML",
+            message_text: md(name + " / " + text + " / [image](" + image + ") / [post](" + link + ")"),
+            parse_mode: "MarkdownV2",
         },
     };
 }
