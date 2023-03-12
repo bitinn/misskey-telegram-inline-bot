@@ -68,6 +68,9 @@ async function getData(browser, link, start) {
 }
 
 bot.on("inline_query", async(ctx) => {
+    const start = Date.now();
+    console.log(start);
+
     const link = ctx.inlineQuery.query;
 
     if (!browser) {
