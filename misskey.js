@@ -63,6 +63,7 @@ async function getData(browser, link, start) {
         thumbnail_url: thumb,
         input_message_content: {
             message_text: name + " / " + text + " / [image](" + image + ") / [post](" + link + ")",
+            parse_mode: "MarkdownV2",
         },
     };
 }
