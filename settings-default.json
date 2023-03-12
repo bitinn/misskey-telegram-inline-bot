@@ -2,8 +2,11 @@
     "token": "... talk to @BotFather ...",
     "domains": ["misskey.io", "misskey.art"],
     "click": ".files",
-    "thumbnail": ".files a",
+    "image": ".files a",
+    "thumbnail": ".files img",
     "text": ".text span",
+    "title": "title",
     "timeout": 20000,
+    "tab": 30000,
     "cache_time": 0
 }
