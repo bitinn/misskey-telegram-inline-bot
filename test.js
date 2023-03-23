@@ -57,14 +57,14 @@ async function getData(browser, link, start) {
     let thumb = "";
     let image = "";
     try {
-        const files = await page.waitForSelector(settings.click, { timeout: settings.find });
+        const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
         await files.click();
         console.log("click files: " + link);
 
-        const images = await page.waitForSelector(settings.image, { timeout: settings.timeout });
+        const images = await page.waitForSelector(settings.image, { timeout: settings.find });
         image = await images.evaluate(el => el.href);
 
-        const thumbs = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
+        const thumbs = await page.waitForSelector(settings.thumbnail, { timeout: settings.find });
         thumb = await thumbs.evaluate(el => el.src);
     } catch (err) {
         // skip

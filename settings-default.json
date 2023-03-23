@@ -8,7 +8,7 @@
     "link": ".text ._link",
     "title": "title",
     "find": 1000,
-    "timeout": 20000,
+    "timeout": 5000,
     "tab": 30000,
     "cache_time": 0
 }
