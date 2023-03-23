@@ -32,18 +32,20 @@ async function getData(browser, link, start) {
         }
     }, settings.tab);
 
-    await page.goto(link, { waitUntil: "domcontentloaded", timeout: settings.timeout });
+    await page.goto(link, { waitUntil: "load", timeout: settings.timeout });
     console.log("open page: " + link);
 
     const title = await page.waitForSelector(settings.title, { timeout: settings.timeout });
     const name = await title.evaluate(el => el.textContent);
+    console.log("get title: " + name);
 
     let text = "";
     let url = "";
     try {
         const texts = await page.waitForSelector(settings.text, { timeout: settings.timeout });
-        const links = await page.waitForSelector(settings.link, { timeout: settings.timeout });
         text = await texts.evaluate(el => el.textContent);
+
+        const links = await page.waitForSelector(settings.link, { timeout: settings.find });
         url = await links.evaluate(el => el.href);
     } catch (err) {
         // skip
@@ -52,19 +54,20 @@ async function getData(browser, link, start) {
     let thumb = "";
     let image = "";
     try {
-        const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
+        const files = await page.waitForSelector(settings.click, { timeout: settings.find });
         await files.click();
         console.log("click files: " + link);
 
-        const thumbs = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
         const images = await page.waitForSelector(settings.image, { timeout: settings.timeout });
-        const thumb = await thumbs.evaluate(el => el.src);
-        const image = await images.evaluate(el => el.href);
+        image = await images.evaluate(el => el.href);
+
+        const thumbs = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
+        thumb = await thumbs.evaluate(el => el.src);
     } catch (err) {
         // skip
     }
 
-    console.log("got data: " + link);
+    console.log("got data: " + (image ? "image" : "link"));
 
     const end = Date.now();
     console.log("time taken: " + (end - start) + " " + link);
@@ -82,8 +85,10 @@ async function getData(browser, link, start) {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} \n ${text} \n [image](${image}) \n [post](${link})`
-                    : md`${name} \n ${text} \n [link](${url})`,
+                    md`${name} \n ${text} \n [image](${image}) \n [post](${link})` :
+                    url ?
+                        md`${name} \n ${text} \n [link](${url})` :
+                        md`${name} \n ${text}`,
             parse_mode: "MarkdownV2",
         },
     };

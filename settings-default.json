@@ -7,6 +7,7 @@
     "text": ".text span",
     "link": ".text ._link",
     "title": "title",
+    "find": 1000,
     "timeout": 20000,
     "tab": 30000,
     "cache_time": 0
