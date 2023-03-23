@@ -85,10 +85,10 @@ async function getData(browser, link, start) {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} \n ${text} \n [image](${image}) \n [post](${link})` :
+                    md`${name} %0A ${text} %0A [image](${image}) %0A [post](${link})` :
                     url ?
-                        md`${name} \n ${text} \n [link](${url})` :
-                        md`${name} \n ${text}`,
+                        md`${name} %0A ${text} %0A [link](${url})` :
+                        md`${name} %0A ${text}`,
             parse_mode: "MarkdownV2",
         },
     };
