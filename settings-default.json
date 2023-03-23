@@ -5,6 +5,7 @@
     "image": ".files a",
     "thumbnail": ".files img",
     "text": ".text span",
+    "link": ".text ._link",
     "title": "title",
     "timeout": 20000,
     "tab": 30000,

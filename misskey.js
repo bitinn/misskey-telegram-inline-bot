@@ -36,17 +36,34 @@ async function getData(browser, link, start) {
     console.log("open page: " + link);
 
     const title = await page.waitForSelector(settings.title, { timeout: settings.timeout });
-    const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
     const name = await title.evaluate(el => el.textContent);
-    await files.click();
-    console.log("click files: " + link);
 
-    const texts = await page.waitForSelector(settings.text, { timeout: settings.timeout });
-    const thumbs = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
-    const images = await page.waitForSelector(settings.image, { timeout: settings.timeout });
-    const text = await texts.evaluate(el => el.textContent);
-    const thumb = await thumbs.evaluate(el => el.src);
-    const image = await images.evaluate(el => el.href);
+    let text = "";
+    let url = "";
+    try {
+        const texts = await page.waitForSelector(settings.text, { timeout: settings.timeout });
+        const links = await page.waitForSelector(settings.link, { timeout: settings.timeout });
+        text = await texts.evaluate(el => el.textContent);
+        url = await links.evaluate(el => el.href);
+    } catch (err) {
+        // skip
+    }
+
+    let thumb = "";
+    let image = "";
+    try {
+        const files = await page.waitForSelector(settings.click, { timeout: settings.timeout });
+        await files.click();
+        console.log("click files: " + link);
+
+        const thumbs = await page.waitForSelector(settings.thumbnail, { timeout: settings.timeout });
+        const images = await page.waitForSelector(settings.image, { timeout: settings.timeout });
+        const thumb = await thumbs.evaluate(el => el.src);
+        const image = await images.evaluate(el => el.href);
+    } catch (err) {
+        // skip
+    }
+
     console.log("got data: " + link);
 
     const end = Date.now();
@@ -63,7 +80,10 @@ async function getData(browser, link, start) {
         url: link,
         thumbnail_url: thumb,
         input_message_content: {
-            message_text: md`${name} / ${text} / [image](${image}) / [post](${link})`,
+            message_text:
+                image ?
+                    md`${name} \n ${text} \n [image](${image}) \n [post](${link})`
+                    : md`${name} \n ${text} \n [link](${url})`,
             parse_mode: "MarkdownV2",
         },
     };
