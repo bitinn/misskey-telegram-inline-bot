@@ -2,6 +2,7 @@
 const puppeteer = require("puppeteer");
 const { md } = require("telegram-escape");
 const crypto = require("crypto");
+const { fetchJson } = require("fetch-json");
 
 const defaults = require(__dirname + "/settings-default.json");
 const configs = require(__dirname + "/settings.json");
