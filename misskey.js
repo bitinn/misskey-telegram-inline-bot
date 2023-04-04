@@ -1,4 +1,5 @@
 
+const { Telegraf } = require("telegraf");
 const getNote = require("./getNote");
 
 const defaults = require(__dirname + "/settings-default.json");
