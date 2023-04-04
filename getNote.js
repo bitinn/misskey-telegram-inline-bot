@@ -51,10 +51,10 @@ module.exports = async (query) => {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} (${user}) / ${text} / [image](${image}) / [post](${link})` :
+                    md`${name} (@${user}@${url.hostname}) / ${text} / [image](${image}) / [post](${link})` :
                     url ?
-                        md`${name} (${user}) / ${text} / [link](${url})` :
-                        md`${name} (${user}) / ${text}`,
+                        md`${name} (@${user}@${url.hostname}) / ${text} / [link](${url})` :
+                        md`${name} (@${user}@${url.hostname}) / ${text}`,
             parse_mode: "MarkdownV2",
         },
     };
