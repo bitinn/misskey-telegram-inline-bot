@@ -33,6 +33,8 @@ module.exports = async (query) => {
     let user = data.user.username ? data.user.username : "";
     let text = data.text ? data.text : "";
 
+    let fullname = `(@${user}@${url.hostname})`;
+
     let thumb = "";
     let image = "";
 
@@ -51,10 +53,10 @@ module.exports = async (query) => {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} (@${user}@${url.hostname}) / ${text} / [image](${image}) / [post](${link})` :
+                    md`${name} ${fullname} / ${text} / [image](${image}) / [post](${link})` :
                     url ?
-                        md`${name} (@${user}@${url.hostname}) / ${text} / [link](${url})` :
-                        md`${name} (@${user}@${url.hostname}) / ${text}`,
+                        md`${name} ${fullname} / ${text} / [link](${url})` :
+                        md`${name} ${fullname} / ${text}`,
             parse_mode: "MarkdownV2",
         },
     };
