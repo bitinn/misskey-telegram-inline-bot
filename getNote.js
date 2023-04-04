@@ -29,8 +29,9 @@ module.exports = async (query) => {
     }).then(res => res.json());
     //console.log(data);
 
-    let name = data.user.name;
-    let text = data.text;
+    let name = data.user.name ? data.user.name : "";
+    let user = data.user.username ? data.user.username : "";
+    let text = data.text ? data.text : "";
 
     let thumb = "";
     let image = "";
@@ -50,10 +51,10 @@ module.exports = async (query) => {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} / ${text} / [image](${image}) / [post](${link})` :
+                    md`${name} (${user}) / ${text} / [image](${image}) / [post](${link})` :
                     url ?
-                        md`${name} / ${text} / [link](${url})` :
-                        md`${name} / ${text}`,
+                        md`${name} (${user}) / ${text} / [link](${url})` :
+                        md`${name} (${user}) / ${text}`,
             parse_mode: "MarkdownV2",
         },
     };
