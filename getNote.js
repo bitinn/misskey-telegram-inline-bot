@@ -54,10 +54,8 @@ module.exports = async (query) => {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} ${fullname} ${nl} ${text} ${nl} [image](${image}) ${nl} [post](${link})` :
-                    url ?
-                        md`${name} ${fullname} ${nl} ${text} ${nl} [link](${url})` :
-                        md`${name} ${fullname} ${nl} ${text}`,
+                    md`${name} ${fullname} ${nl}${nl}${text} ${nl}${nl}[Image](${image}) / [Post](${link})` :
+                    md`${name} ${fullname} ${nl}${nl}${text} ${nl}${nl}[Post](${link})`;
             parse_mode: "MarkdownV2",
         },
     };
