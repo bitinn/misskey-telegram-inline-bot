@@ -29,9 +29,10 @@ module.exports = async (query) => {
     }).then(res => res.json());
     //console.log(data);
 
-    let name = data.user.name ? data.user.name : "";
-    let user = data.user.username ? data.user.username : "";
+    let user = data.user.username ? data.user.username : "unknown";
+    let name = data.user.name ? data.user.name : user;
     let text = data.text ? data.text : "";
+    let nl = "\n";
 
     let fullname = `(@${user}@${url.hostname})`;
 
@@ -53,10 +54,10 @@ module.exports = async (query) => {
         input_message_content: {
             message_text:
                 image ?
-                    md`${name} ${fullname} / ${text} / [image](${image}) / [post](${link})` :
+                    md`${name} ${fullname} ${nl} ${text} ${nl} [image](${image}) ${nl} [post](${link})` :
                     url ?
-                        md`${name} ${fullname} / ${text} / [link](${url})` :
-                        md`${name} ${fullname} / ${text}`,
+                        md`${name} ${fullname} ${nl} ${text} ${nl} [link](${url})` :
+                        md`${name} ${fullname} ${nl} ${text}`,
             parse_mode: "MarkdownV2",
         },
     };
